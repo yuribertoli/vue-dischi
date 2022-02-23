@@ -27,7 +27,7 @@ export default {
 @import "../../assets/style/variables.scss";
 
 .card {
-    width: calc(20% - 50px);
+    width: calc(20% - 40px);
     height: 300px;
     padding: 10px;
     margin: 10px;
