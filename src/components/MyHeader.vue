@@ -3,6 +3,7 @@
       <img src="../assets/img/spotify-logo.png" alt="Spotify Logo">
 
         <!-- al cambio di un valore, la funzione change() invia il value dell'option (funzione specifica per questo tag, oltre ai tag input e textarea)  -->
+        <!-- $event passa alla funzione di cui è argomento, l'oggetto relativo all'evento del DOM che si è verificato, in questo caso il cambio di value -->
       <select @change="valoreOption($event)">
 
           <!-- rendo la prima opzione non selezionabile, da usare come titolo soltanto -->
