@@ -19,19 +19,33 @@
           </option>
 
       </select>
+
+        <!-- Ricopio le stesse regole per filtrare i nomi degli artisti -->
+      <select @change="valoreArtista($event)">
+
+        <option class="titoletto" selected="false" disabled="disabled" value="artista">Scegli un artista</option>
+
+        <option
+
+            v-for="(artista, indice) in artistiAlbums" 
+            :key="indice" 
+            :value="artista">
+
+            {{artista}}
+
+        </option>
+
+      </select>
+
   </header>
 </template>
 
 <script>
 export default {
     name: "MyHeader",
-    props: { //ricevo da App l'array di generi inviato da Main
-        'generiAlbums': Array
-    },
-
-    data(){
-        return{
-        }
+    props: { //ricevo da App l'array di generi e di artisti inviato da Main
+        'generiAlbums': Array,
+        'artistiAlbums': Array
     },
 
     methods: {

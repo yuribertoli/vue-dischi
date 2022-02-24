@@ -52,6 +52,7 @@ export default {
         return {
             albums: [],
             generiMusicali: [],
+            artistiMusicali: [],
             caricamento: true,
             endpoint: 'https://flynn.boolean.careers/exercises/api/array/music'
         }
@@ -67,11 +68,13 @@ export default {
                     //inserisco i dati dell'array nella variabile vuota albums
                     this.albums = risposta.data.response;
 
-                    //richiamo la funzione per prendere i generi musicali dagli albums
+                    //richiamo la funzione per prendere i generi musicali e gli artisti dagli albums
                     this.generi();
+                    this.artisti();
 
-                    //invio ad App i generi degli album
+                    //invio ad App i generi degli album e gli artisti
                     this.$emit('eventoGeneriAlbums', this.generiMusicali);
+                    this.$emit('eventoArtistiAlbums', this.artistiMusicali);
 
                     //imposto caricamento su false per far funzionare il v-if nell'html e non mostrare più il div di caricamento
                     this.caricamento = false;
@@ -89,6 +92,19 @@ export default {
                 } 
             }
             console.log('i generi musicali sono: ' + this.generiMusicali);
+        },
+
+        //creo una funzione per ottenere i nomi degli artisti negli elementi dell'array albums
+        artisti(){
+            
+            for (let i=0; i<this.albums.length; i++) {
+
+                //se l'artista ciclato non è già presente nell'array artistiMusicali lo aggiungo con push
+                if (!this.artistiMusicali.includes(this.albums[i].author)) {
+                    this.artistiMusicali.push(this.albums[i].author);
+                } 
+            }
+            console.log('gli artisti sono: ' + this.artistiMusicali);
         }
     },
 
