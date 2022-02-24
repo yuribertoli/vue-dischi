@@ -4,14 +4,19 @@
 
       <select>
           <option selected="false" disabled="disabled" value="scelta">Scegli un genere</option>
-          <option value=""></option>
+          <option v-for="(genere, indice) in generiAlbums" :key="indice" :value="genere">
+              {{genere}}
+          </option>
       </select>
   </header>
 </template>
 
 <script>
 export default {
-    name: "MyHeader"
+    name: "MyHeader",
+    props: {
+        'generiAlbums': Array
+    }
 }
 </script>
 
@@ -35,6 +40,10 @@ export default {
             margin: 10px 30px 0 0;
             width: 150px;
             color: black;
+
+            option {
+                color: black;
+            }
         }
     }
 </style>

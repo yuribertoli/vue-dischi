@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <MyHeader/>
+    <MyHeader :generiAlbums="arrayGeneri"/> <!-- mando all'header arrayGeneri tramite la props generiAlbums -->
     <MyMain @eventoGeneriAlbums="popolaArrayApp"/> <!-- all'evento richiamo la funzione popolaArrayApp -->
   </div>
 </template>
