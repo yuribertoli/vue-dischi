@@ -17,7 +17,7 @@
         <div class="albums">
 
             <!-- ciclo l'array per ricavarne ogni oggetto presente, passo poi questi valori al componente figlio MyCard tramite la props :disco -->
-            <MyCard :disco="album" v-for="(album, indice) in albums" :key="indice"/>
+            <MyCard v-show="album.genre.includes(valoreOptionRicevuto)" :disco="album" v-for="(album, indice) in albums" :key="indice"/>
 
         </div>
         
@@ -34,6 +34,10 @@ const axios = require('axios').default;
 export default {
 
     name: "MyMain",
+
+    props: {
+        "valoreOptionRicevuto": String
+    },
 
     components: {
         MyCard

@@ -2,11 +2,21 @@
   <header>
       <img src="../assets/img/spotify-logo.png" alt="Spotify Logo">
 
-      <select>
-          <option selected="false" disabled="disabled" value="scelta">Scegli un genere</option>
-          <option v-for="(genere, indice) in generiAlbums" :key="indice" :value="genere">
-              {{genere}}
+        <!-- al cambio di un valore, la funzione change() invia il value dell'option (funzione specifica per questo tag, oltre ai tag input e textarea)  -->
+      <select @change="valoreOption($event)">
+
+          <!-- rendo la prima opzione non selezionabile, da usare come titolo soltanto -->
+          <option class="titoletto" selected="false" disabled="disabled" value="scelta">Scegli un genere</option>
+
+          <!-- ciclo i componenti dell'array per popolare dinamicamento le option-->
+          <option 
+                    v-for="(genere, indice) in generiAlbums" 
+                    :key="indice" 
+                    :value="genere">
+
+                    {{genere}}
           </option>
+
       </select>
   </header>
 </template>
@@ -14,8 +24,23 @@
 <script>
 export default {
     name: "MyHeader",
-    props: {
+    props: { //ricevo da App l'array di generi inviato da Main
         'generiAlbums': Array
+    },
+
+    data(){
+        return{
+        }
+    },
+
+    methods: {
+
+        //funzione per ottenere il value dell'opzione cliccata
+        valoreOption(event){
+
+            //invio ad App il valore del genere cambiato
+            this.$emit('onClick', event.target.value);
+        }
     }
 }
 </script>
