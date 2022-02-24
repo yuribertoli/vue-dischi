@@ -42,6 +42,7 @@ export default {
     data() {
         return {
             albums: [],
+            generiMusicali: [],
             caricamento: true,
             endpoint: 'https://flynn.boolean.careers/exercises/api/array/music'
         }
@@ -53,32 +54,40 @@ export default {
             //effettuo una chiamata all'url indicato dalla variabile endpoint
             axios.get(this.endpoint)
                 .then((risposta) => {
-                    console.log(risposta);
 
                     //inserisco i dati dell'array nella variabile vuota albums
                     this.albums = risposta.data.response;
 
+                    //richiamo la funzione per prendere i generi musicali dagli albums
+                    this.generi();
+
+                    //invio ad App i generi degli album
+                    this.$emit('eventoGeneriAlbums', this.generiMusicali);
+
                     //imposto caricamento su false per far funzionare il v-if nell'html e non mostrare più il div di caricamento
                     this.caricamento = false;
-                    console.log(this.albums);
             })
+        },
+
+        //creo una funzione per ottenere i generi degli elementi nell'array albums
+        generi(){
+            
+            for (let i=0; i<this.albums.length; i++) {
+
+                //se il genere ciclato non è già presente nell'array generiMusicali lo aggiungo con push
+                if (!this.generiMusicali.includes(this.albums[i].genre)) {
+                    this.generiMusicali.push(this.albums[i].genre);
+                } 
+            }
+            console.log('i generi musicali sono: ' + this.generiMusicali);
         }
     },
 
     //utilizzo computed per filtrare dei dati già posseduti in modo da ottimizzare le risorse e non dover effettuare la chiamata al server se i dati di partenza non sono cambiati
-    computed: {
-
-        //creo un array che prende come elementi i generi dell'array albums
-        generi(){
-            let generiMusicali = [];
-            for (let i=0; i<this.albums.length; i++) {
-                generiMusicali.push(this.albums[i].genre);
-            }
-            console.log('i generi musicali sono: ' + generiMusicali);
-            return generiMusicali;
-        }
+    computed: {  
     },
 
+    //avvio al montaggio la funzione pippo
     mounted() {
         this.pippo();
     }

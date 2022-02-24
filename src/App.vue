@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <MyHeader/>
-    <MyMain/>
+    <MyMain @eventoGeneriAlbums="popolaArrayApp"/> <!-- all'evento richiamo la funzione popolaArrayApp -->
   </div>
 </template>
 
@@ -14,6 +14,21 @@ export default {
   components: {
     MyHeader,
     MyMain
+  },
+
+  data(){
+    return { //creo un array vuoto per popolarlo con i valori ricevuti da Main e da inviare poi a Header
+      arrayGeneri: []
+    }
+  },
+
+  methods: {
+
+    //funzione per prendere i valori ricevuti da $emit in Main e popolare arrayGeneri
+    popolaArrayApp(valore){
+      this.arrayGeneri = valore;
+      console.log("array in App: " + this.arrayGeneri);
+    }
   }
 }
 </script>
