@@ -4,14 +4,17 @@
     <!-- invio all'Header arrayGeneri tramite la props generiAlbums -->
     <!-- all'evento onClick di Header richiamo la funzione selezioneValueSelect -->
     <MyHeader :generiAlbums="arrayGeneri" @onClick="selezioneValueSelect"
-              :artistiAlbums="arrayArtisti"/> 
+              :artistiAlbums="arrayArtisti" @ArtistClick="selezioneArtistaSelect"/> 
     <!-- invio ad Header i nomi degli artisti tramite la props artistiAlbums -->
+    <!-- ricevo il valore dell'artista selezionato e richiamo la funzione selezioneArtistaSelect -->
+
 
     <!-- all'evento richiamo la funzione popolaArrayApp -->
     <!-- invio al Main il valore dell'option selezionata tramite la props valoreOptionRicevuto -->
     <MyMain @eventoGeneriAlbums="popolaArrayApp" :valoreOptionRicevuto="valoreOpzione"
-            @eventoArtistiAlbums="nomiArtisti"/> 
+            @eventoArtistiAlbums="nomiArtisti" :valoreArtistaRicevuto="valoreArtista"/> 
     <!-- ricevo da eventoArtistiAlbums un array e richiamo la funzione nomiArtisti -->
+    <!-- invio al Main il valore dell'artista selezionato tramite la props valoreArtistaRicevuto -->
 
   </div>
 </template>
@@ -36,7 +39,9 @@ export default {
       arrayArtisti: [],
 
       //creo una variabile da popolare con il value dell'option cliccata nell'header
-      valoreOpzione: ""
+      //poi una per il nome dell'artista selezionato
+      valoreOpzione: "",
+      valoreArtista: ""
     }
   },
 
@@ -54,10 +59,17 @@ export default {
       console.log("valore nell'option: " + this.valoreOpzione);
     },
 
+
+
     //funzione per prendere i valori ricevuti da $emit in Main e popolare arrayArtisti
     nomiArtisti(valore){
       this.arrayArtisti = valore;
-      console.log("nomi artisti in App: " + this.arrayArtisti);
+    },
+
+    //inoltro alla variabile valoreArtista il valore dell'artista selezionato
+    selezioneArtistaSelect(valore){
+      this.valoreArtista = valore;
+      console.log("valore nell'option artisti: " + this.valoreArtista);
     }
   }
 }

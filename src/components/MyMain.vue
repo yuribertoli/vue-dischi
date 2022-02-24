@@ -18,7 +18,8 @@
 
             <!-- ciclo l'array per ricavarne ogni oggetto presente, passo poi questi valori al componente figlio MyCard tramite la props :disco -->
             <!-- mostro tramite v-show solo gli elementi che hanno il genere musicale uguale a quello selezionato nell'Header -->
-            <MyCard v-show="album.genre.includes(valoreOptionRicevuto)" 
+            <!-- aggiungo && per mostrare solo gli album che hanno anche lo stesso nome di artista selezionato -->
+            <MyCard v-show="album.genre.includes(valoreOptionRicevuto) && album.author.includes(valoreArtistaRicevuto)" 
                     :disco="album" 
                     v-for="(album, indice) in albums" 
                     :key="indice"
@@ -41,7 +42,8 @@ export default {
     name: "MyMain",
 
     props: {
-        "valoreOptionRicevuto": String
+        "valoreOptionRicevuto": String,
+        "valoreArtistaRicevuto": String
     },
 
     components: {
